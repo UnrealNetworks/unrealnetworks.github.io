@@ -1,0 +1,547 @@
+@import "elements";
+@import url(http://fonts.googleapis.com/css?family=Wendy+One);
+
+@bodyFontSize: 14px;
+@timerFontSize: 45px;
+
+@socialIconSize: 50px;
+
+@thumbSpacing: 20px;
+
+@footerTotalHeight: 60px;
+@footerBgImgHeight: 12px;
+@footerHeight: @footerTotalHeight - @footerBgImgHeight;
+@footerBg: #0c4b5d;
+
+@bgZIndex: 0;
+@patternZIndex: 5;
+@contentZIndex: 10;
+
+@linkColor: #85eebe;
+@paleTextColor: #84bfd1;
+@floatBoxBorderColor: #81a7b2;
+
+@beastWidth: 112px;
+@beastHeight: 105px;
+@smallBeastRatio: .7;
+
+.social-icon(@img) {
+  background-image: url("../img/icons/@{img}.png");
+}
+
+/* === basic settings === */
+body {
+  background: #3e8aa0 url(../img/body_bg.png) repeat-x 0 0;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: @bodyFontSize;
+  line-height: 20px;
+  color: #ffffff;
+}
+a {
+  color: @linkColor;
+  text-decoration: none;
+//  .transition(1s,ease,color);
+}
+a:hover {
+  color: darken(@linkColor, 25%);
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Wendy One;
+}
+
+/* === preloader === */
+.preloader {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url(../img/preloader.gif) no-repeat center top;
+
+  .intro-text {
+    text-align: center;
+    margin-top: 40px;
+    font-family: 'Wendy One';
+  }
+}
+
+/* === scenery, clouds, mountains and beasts === */
+.scenery {
+  overflow: hidden;
+}
+
+.clouds {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  height: 384px;
+  background: url(../img/clouds.png) repeat-x 0 0;
+}
+
+.mountains {
+  background-repeat: repeat-x;
+  min-height: 100px;
+}
+
+.mountains3 {
+  background-image: url(../img/mountains3.png);
+  background-position: -5% 0;
+  padding-top: 100px;
+  margin-top: -40px;
+}
+
+.mountains2 {
+  background-image: url(../img/mountains2.png);
+  background-position: -45% 0;
+  padding-top: 60px;
+}
+
+.mountains1 {
+  background-image: url(../img/mountains1.png);
+  background-position: -95% 0;
+  position: relative;
+  padding-top: 55px;
+}
+
+.beast {
+  background: url(../img/beasts.png) no-repeat 0 @beastHeight;
+  width: @beastWidth;
+  height: @beastHeight;
+  position: absolute;
+  display: none;
+}
+.beast_small {
+  top: -31px;
+}
+.backgroundsize .beast_small {
+  top: 1px;
+  width: @beastWidth*@smallBeastRatio;
+  height: @beastHeight*@smallBeastRatio;
+  .background-size(auto 100%);
+}
+
+.beast_big {
+  top: -42px;
+}
+
+.grass1 {
+  position: relative;
+  background: url(../img/grass.png) repeat-x center 0;
+  min-height: 110px;
+}
+
+.bushes {
+  position: relative;
+  .bush1 {
+    background: url(../img/bush1.png) no-repeat 17% bottom;
+    height: 71px;
+
+    @media (max-width: 480px) {
+      background-position: -25% bottom;
+    }
+  }
+  .bush2 {
+    background: url(../img/bush2.png) no-repeat 85% bottom;
+    height: 93px;
+    @media (max-width: 480px) {
+      background-position: 125% bottom;
+    }
+  }
+
+}
+
+.grass2 {
+  background: url(../img/grass_bg1.png) repeat-x center 0;
+  height: 57px;
+  margin-top: -15px;
+}
+
+//* === floatbox === */
+.floatbox {
+  .above_pattern();
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  background: url(../img/floatbox_bg.png);
+  border: 3px solid @floatBoxBorderColor;
+  .rounded(7px);
+  padding: 15px;
+  text-align: center;
+  width: 600px;
+  margin-left: -300px;
+
+  @media (max-width: 767px) {
+    top: 20px;
+    left: 10px;
+    right: 10px;
+    margin-left: 0;
+    width: auto;
+  }
+
+}
+.page-404 .intro_message {
+  font-size: @bodyFontSize*5;
+  line-height: @bodyFontSize*5;
+  margin: 0 auto @bodyFontSize*1.5;
+}
+
+/* === countdown === */
+.lt-ie8 .countdown {
+  display: none;
+}
+.countdown {
+  padding-top: 3px;
+  text-align: center;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+
+  .countdown-container {
+    display: inline-block;
+  }
+
+  .countdown-section {
+    margin: 0 15px;
+    float: left;
+
+    .countdown-label {
+      clear: both;
+      margin-top: -10px;
+      font-size: @bodyFontSize - 3;
+      color: @paleTextColor;
+      text-align: center;
+    }
+
+    .digit {
+      padding: 6px 0;
+      width: 32px;
+      height: @timerFontSize;
+      float: left;
+      font-family: 'Wendy One';
+      font-size: @timerFontSize;
+      text-shadow: -1px 2px 15px rgba(0, 0, 0, 0.7);
+
+      &>span {
+        text-align: center;
+        display: block;
+        line-height: @timerFontSize;
+        &:last-child {
+          .opacity(0);
+        }
+      }
+
+    }
+
+  }
+}
+
+/* === follow us section & social buttons === */
+.social {
+  background: url(../img/delimeter_hor.png) repeat-x center top;
+  padding-top: 28px;
+  margin-top: 28px;
+  font-size: @bodyFontSize + 10;
+  line-height: @socialIconSize;
+
+  .follow-text {
+  @media (max-width: 767px) {
+    display: block;
+  }
+  }
+
+  .social-link {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: -18px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    .transition(.75s,linear,opacity);
+    .opacity(.45);
+
+    &:hover {
+      .opacity(1);
+      text-decoration: none;
+    }
+
+    @media (max-width: 767px) {
+      margin: 0 7px;
+    }
+
+    &.amazon {
+      .social-icon(amazon);
+    }
+    &.android {
+      .social-icon(android);
+    }
+    &.apple {
+      .social-icon(apple);
+    }
+    &.appstore {
+      .social-icon(appstore);
+    }
+    &.behance {
+      .social-icon(behance);
+    }
+    &.blogger {
+      .social-icon(blogger);
+    }
+    &.delicious {
+      .social-icon(delicious);
+    }
+    &.deviantart {
+      .social-icon(deviantart);
+    }
+    &.digg {
+      .social-icon(digg);
+    }
+    &.dribbble {
+      .social-icon(dribbble);
+    }
+    &.dropbox {
+      .social-icon(dropbox);
+    }
+    &.ebay {
+      .social-icon(ebay);
+    }
+    &.facebook {
+      .social-icon(facebook);
+    }
+    &.flickr {
+      .social-icon(flickr);
+    }
+    &.forrst {
+      .social-icon(forrst);
+    }
+    &.google {
+      .social-icon(google);
+    }
+    &.googledisc {
+      .social-icon(googledisc);
+    }
+    &.googleplus {
+      .social-icon(googleplus);
+    }
+    &.hotmail {
+      .social-icon(hotmail);
+    }
+    &.html5 {
+      .social-icon(html5);
+    }
+    &.instagram {
+      .social-icon(instagram);
+    }
+    &.lastfm {
+      .social-icon(lastfm);
+    }
+    &.linkedin {
+      .social-icon(linkedin);
+    }
+    &.myspace {
+      .social-icon(myspace);
+    }
+    &.paypal {
+      .social-icon(paypal);
+    }
+    &.picasa {
+      .social-icon(picasa);
+    }
+    &.pinterest {
+      .social-icon(pinterest);
+    }
+    &.rss {
+      .social-icon(rss);
+    }
+    &.skype {
+      .social-icon(skype);
+    }
+    &.soundcloud {
+      .social-icon(soundcloud);
+    }
+    &.stumbleupon {
+      .social-icon(stumbleupon);
+    }
+    &.technorati {
+      .social-icon(technorati);
+    }
+    &.tumblr {
+      .social-icon(tumblr);
+    }
+    &.twitter {
+      .social-icon(twitter);
+    }
+    &.vimeo {
+      .social-icon(vimeo);
+    }
+    &.windows {
+      .social-icon(windows);
+    }
+    &.wordpress {
+      .social-icon(wordpress);
+    }
+    &.yahoo {
+      .social-icon(yahoo);
+    }
+    &.youtube {
+      .social-icon(youtube);
+    }
+  }
+}
+
+/* === content area === */
+.content-area {
+  .gradient(#317588,#2a6d80,#377a8e);
+  min-height: 20px;
+  margin-top: -20px;
+  padding-top: 20px;
+
+  @media (max-width: 767px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+}
+
+.content-section {
+  margin-bottom: 30px;
+  .above_pattern();
+
+}
+.content-section-bordered {
+  @media (min-width: 768px) {
+     &:after,&:before {
+      content: " ";
+      position: absolute;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: url(../img/delimeter.png) no-repeat 0 center;
+    }
+
+    &:before {
+      left: -12px;
+    }
+
+    &:after {
+      right: -12px;
+    }
+  }
+}
+
+.section-title {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+/* === latest tweets === */
+.tweet_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+  li {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.5em;
+    list-style-type: none;
+  }
+}
+
+
+.tweet_list .tweet_avatar {
+  padding-right: .5em; float: left;
+  img {
+    vertical-align: middle;
+  }
+}
+
+.tweet_time {
+  float: right;
+  margin-left: 5px;
+  font-size: @bodyFontSize - 3;
+}
+
+/* === thumbnails === */
+.thumbnails-holder {
+  margin-left: -@thumbSpacing;
+  overflow: hidden;
+
+  .thumb {
+    float:left;
+    margin-left: @thumbSpacing;
+    margin-bottom: @thumbSpacing;
+    a {
+      display: block;
+      border: 3px solid #fff;
+      .drop-shadow(1px,1px,3px,.6);
+      .rounded(7px);
+
+      img {
+        width: 80px;
+        @media (max-width: 979px) and (min-width: 768px) {
+          width: 56px;
+        }
+        @media (min-width: 1200px) {
+        width: 104px;
+        }
+
+        .rounded(7px);
+      }
+    }
+  }
+}
+
+.above_pattern() {
+  position: relative;
+  z-index: @contentZIndex;
+}
+
+/* === page footer === */
+.page-footer {
+  height: @footerTotalHeight;
+  .footer-top-bg {
+    background: url(../img/footer_bg.png) repeat-x center 0;
+    height: @footerBgImgHeight;
+    z-index: @patternZIndex - 1;
+    margin-top: -8px;
+  }
+
+  .footer-content-wrapper {
+    background: @footerBg;
+    .footer-content {
+      .above_pattern();
+      color: @paleTextColor;
+      height: 100%;
+      text-align: center;
+      line-height: @footerHeight;
+      font-size: @bodyFontSize - 2;
+    }
+  }
+}
+
+/* === pattern overlay === */
+.pattern {
+  background: url(../img/pattern.png);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  z-index: @patternZIndex;
+}
+
+.lt-ie8 .pattern {
+  display: none;
+}
+
+@import "prettyPhoto";
